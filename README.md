@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/homebridge-http-environmentals.svg)](https://badge.fury.io/js/homebridge-http-environmentals)
 # homebridge-http-environmentals
 
 A HTTP(S) environmental monitoring accessory for [Homebridge](https://github.com/nfarina/homebridge).
