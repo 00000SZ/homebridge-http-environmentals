@@ -43,4 +43,4 @@ Your HTTP(S) endpoint should produce JSON that looks like this:
 
 ---
 
-**This plugin only acts as an interface between a web endpoint and Homebridge.** You will still need some dedicated hardware to expose the web endpoints with the temperature and humidity information. In my case, I used a simple NodeMCU board and a DHT11 (or DHT22). [Check my other repo for the NodeMCU code](https://github.com/lucacri/nodemcu-temperature-humidity-station).
+**This plugin only acts as an interface between a web endpoint and Homebridge.** You will still need some dedicated hardware to expose the web endpoints with the sensor information. There is a code sample for ESP8266 with an MPL3115A2 pressure sensor.  This will be updated with Bosch BME280 support soon once my sensor arrives as I've found the DHTXX sensors to be inacurate/unreliable. 

@@ -1,6 +1,6 @@
 {
   "name": "homebridge-http-environmentals",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "http plugin for homebridge",
   "license": "ISC",
   "keywords": [

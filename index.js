@@ -55,7 +55,7 @@ HttpEnvironmentals.prototype = {
 		this.humidity = res.body.humidity;
                 
 		this.pressureService.setCharacteristic(
-		    Charecteristic.CurrentBarometricPressure,
+		    Characteristic.CurrentBarometricPressure,
 		    res.body.pressure
 		);
 	        this.pressure = res.body.pressure;
@@ -118,7 +118,7 @@ HttpEnvironmentals.prototype = {
 
         this.pressureService = new Service.PressureSensor(this.name);
         this.pressureService
-            .getCharacteristic(Characteristic.CurrentBarametricPressure)
+            .getCharacteristic(Characteristic.CurrentBarometricPressure)
             .setProps({ minValue: 0, maxValue: 1200 })
             .on("get", this.getPressureState.bind(this));
         services.push(this.pressureService);	
