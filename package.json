@@ -1,6 +1,6 @@
 {
   "name": "homebridge-http-environmentals",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "http plugin for homebridge",
   "license": "ISC",
   "keywords": [
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/00000SZ/homebridge-http-temperature-humidity"
+    "url": "git://github.com/00000SZ/homebridge-http-environmentals"
   },
   "dependencies": {
     "cache-service-cache-module": "^1.2.5",

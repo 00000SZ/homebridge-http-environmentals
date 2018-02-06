@@ -11,10 +11,10 @@ var superagentCache = require("superagent-cache-plugin")(cache);
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
-    homebridge.registerAccessory("homebridge-httpenvironmentals", "HttpEnvironmentals", HttpEnvironmentals);
+    homebridge.registerAccessory("homebridge-http-environmentals", "HttpEnvironmentals", HttpEnvironmentals);
 }
 
-function HttpTemphum(log, config) {
+function HttpEnvironmentals(log, config) {
     this.log = log;
 
     // Configuration

@@ -20,7 +20,7 @@ Sample configuration:
     {
         "accessory": "HttpEnvironmentals",
         "name": "Living Room Environmentals",
-        "url": "http://192.168.1.210/sensor/read",
+        "url": "http://192.168.1.210/sensors",
         "httpMethod": "GET",
         "cacheExpiration": 60
     }
