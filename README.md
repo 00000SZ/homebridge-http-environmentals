@@ -3,7 +3,7 @@
 
 A HTTP(S) environmental monitoring accessory for [Homebridge](https://github.com/nfarina/homebridge).
 
-Forked from [lucacri/homebridge-http-temperature-humidity](]https://github.com/lucacri/homebridge-http-temperature-humidity)
+Forked from [lucacri/homebridge-http-temperature-humidity](https://github.com/lucacri/homebridge-http-temperature-humidity)
 
 # Installation
 
