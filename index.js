@@ -11,7 +11,7 @@ var superagentCache = require("superagent-cache-plugin")(cache);
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
-    homebridge.registerAccessory("homebridge-httptemperaturehumidity", "HttpTemphum", HttpTemphum);
+    homebridge.registerAccessory("homebridge-httpenvironmentals", "HttpEnvironmentals", HttpEnvironmentals);
 }
 
 function HttpTemphum(log, config) {
@@ -24,12 +24,11 @@ function HttpTemphum(log, config) {
     this.manufacturer    = config["manufacturer"] || "Generic";
     this.model           = config["model"] || "HTTP(S)";
     this.serial          = config["serial"] || "";
-    this.humidity        = config["humidity"];
     this.lastUpdateAt    = config["lastUpdateAt"] || null;
     this.cacheExpiration = config["cacheExpiration"] || 60;
 }
 
-HttpTemphum.prototype = {
+HttpEnvironmentals.prototype = {
 
     getRemoteState: function(service, callback) {
         request(this.httpMethod, this.url)
@@ -49,13 +48,17 @@ HttpTemphum.prototype = {
                 );
                 this.temperature = res.body.temperature;
 
-                if (this.humidity !== false) {
-                    this.humidityService.setCharacteristic(
-                        Characteristic.CurrentRelativeHumidity,
-                        res.body.humidity
-                    );
-                    this.humidity = res.body.humidity;
-                }
+                this.humidityService.setCharacteristic(
+                    Characteristic.CurrentRelativeHumidity,
+                    res.body.humidity
+                );
+		this.humidity = res.body.humidity;
+                
+		this.pressureService.setCharacteristic(
+		    Charecteristic.CurrentBarometricPressure,
+		    res.body.pressure
+		);
+	        this.pressure = res.body.pressure;
 
                 this.lastUpdateAt = +Date.now();
 
@@ -66,6 +69,9 @@ HttpTemphum.prototype = {
                     case "humidity":
                         callback(null, this.humidity);
                         break;
+		    case "pressure":
+			callback(null, this.pressure);
+			break;
                     default:
                         var error = new Error("Unknown service: " + service);
                         callback(error);
@@ -80,6 +86,10 @@ HttpTemphum.prototype = {
 
     getHumidityState: function(callback) {
         this.getRemoteState("humidity", callback);
+    },
+    
+    getPressureState: function(callback) {
+        this.getRemoteState("pressure", callback);
     },
 
     getServices: function () {
@@ -99,14 +109,19 @@ HttpTemphum.prototype = {
             .on("get", this.getTemperatureState.bind(this));
         services.push(this.temperatureService);
 
-        if (this.humidity !== false) {
-            this.humidityService = new Service.HumiditySensor(this.name);
-            this.humidityService
-                .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-                .setProps({ minValue: 0, maxValue: 200 })
-                .on("get", this.getHumidityState.bind(this));
-            services.push(this.humidityService);
-        }
+        this.humidityService = new Service.HumiditySensor(this.name);
+        this.humidityService
+            .getCharacteristic(Characteristic.CurrentRelativeHumidity)
+            .setProps({ minValue: 0, maxValue: 200 })
+            .on("get", this.getHumidityState.bind(this));
+        services.push(this.humidityService);
+
+        this.pressureService = new Service.PressureSensor(this.name);
+        this.pressureService
+            .getCharacteristic(Characteristic.CurrentBarametricPressure)
+            .setProps({ minValue: 0, maxValue: 1200 })
+            .on("get", this.getPressureState.bind(this));
+        services.push(this.pressureService);	
 
         return services;
     }

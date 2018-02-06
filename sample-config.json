@@ -12,9 +12,9 @@
 
     "accessories": [
         {
-            "accessory": "HttpTemphum",
-            "name": "Living Room Weather",
-            "url": "http://192.168.1.210/weather",
+            "accessory": "HttpEnvironmentals",
+            "name": "Living Room Environmentals",
+            "url": "http://192.168.1.210/temperature",
             "httpMethod": "GET",
             "humidity": true,
             "cacheExpiration": 60

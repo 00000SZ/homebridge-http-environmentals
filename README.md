@@ -1,11 +1,13 @@
-# homebridge-http-temperature-humidity
+# homebridge-http-environmentals
 
-A HTTP(S) temperature and humidity accessory for [Homebridge](https://github.com/nfarina/homebridge).
+A HTTP(S) environmental monitoring accessory for [Homebridge](https://github.com/nfarina/homebridge).
+
+Forked from [lucacri/homebridge-http-temperature-humidity](]https://github.com/lucacri/homebridge-http-temperature-humidity)
 
 # Installation
 
 1. Install homebridge using: `npm install -g homebridge`
-2. Install this plugin using: `npm install -g homebridge-http-temperature-humidity`
+2. Install this plugin using: `npm install -g homebridge-http-environmentals`
 3. Update your configuration file. See `sample-config.json` in this repository for a sample.
 
 # Configuration
@@ -15,17 +17,14 @@ Sample configuration:
 ```
 "accessories": [
     {
-        "accessory": "HttpTemphum",
-        "name": "Living Room Weather",
-        "url": "http://192.168.1.210/weather",
+        "accessory": "HttpEnvironmentals",
+        "name": "Living Room Environmentals",
+        "url": "http://192.168.1.210/sensor/read",
         "httpMethod": "GET",
-        "humidity": true,
         "cacheExpiration": 60
     }
 ]
 ```
-
-Set `humidity` to false if your HTTP endpoint doesn't include a humidity reading.
 
 The `cacheExpiration` option specifies, in seconds, how long HTTP responses will be stored in the in-memory cache.
 
@@ -36,7 +35,8 @@ Your HTTP(S) endpoint should produce JSON that looks like this:
 ```
 {
     "temperature": 25.8,
-    "humidity": 38
+    "humidity": 38,
+    "pressure": 1011
 }
 ```
 
